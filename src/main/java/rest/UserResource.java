@@ -70,5 +70,6 @@ public class UserResource {
     public Response deleteUser(@PathParam("userName") String userName) throws API_Exception {
         UserDTO deletedUser = facade.deleteUser(userName);
         return Response.ok().entity(GSON.toJson(deletedUser)).type(MediaType.APPLICATION_JSON_TYPE.withCharset(StandardCharsets.UTF_8.name())).build();
+
     }
 }
