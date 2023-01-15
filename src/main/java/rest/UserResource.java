@@ -35,7 +35,6 @@ public class UserResource {
     @Produces({MediaType.APPLICATION_JSON})
     public Response getById(@PathParam("userName") String userName) throws API_Exception {
         return Response.ok().entity(GSON.toJson(facade.getUserByUserName(userName))).type(MediaType.APPLICATION_JSON_TYPE.withCharset(StandardCharsets.UTF_8.name())).build();
-
     }
 
     @GET
