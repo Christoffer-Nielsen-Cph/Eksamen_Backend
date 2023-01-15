@@ -36,7 +36,7 @@ public class LoginResource {
     @GET
     @Produces(MediaType.APPLICATION_JSON)
     public String getInfoForAll() {
-        return "{\"msg\":\"Hello anonymouss\"}";
+        return "{\"msg\":\"Hello anonymous\"}";
     }
 
     @GET
