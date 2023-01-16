@@ -2,15 +2,19 @@
 GET http://localhost:8080/api/admin/invoiceDetails/1
 
 ### Updates an existing person
-PUT http://localhost:8080/api/users/Christoffer
+PUT https://cphcn332.dk/tomcat/3sem_backend/api/users/TestAdmin
 Content-Type: application/json
 
 {
-  "userName": "Christoffer",
-  "userPass": "test123",
-  "userEmail": "chris@gmail.com",
-  "userPhone": 10203040,
-  "userBillingPrHour": 400
+  "userName": "TestAdmin",
+  "userPass": "123",
+  "userEmail": "TestAdmin@gmail.com",
+  "userPhone": 30603040,
+  "userBillingPrHour": 1000,
+  "roleList": [
+    "user",
+    "admin"
+  ]
 }
 
 ### List of all users
