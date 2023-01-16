@@ -17,7 +17,7 @@ Content-Type: application/json
 GET http://localhost:8080/api/developer/myProjects/admin
 Content-Type: application/json
 
-### System greets the admin in this case, if he's logged in
+### System greets the admin in this case, if he's  logged in
 GET http://localhost:8080/api/info/admin
 x-access-token:eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJhZG1pbiIsInJvbGVzIjoiYWRtaW4iLCJleHAiOjE2NjcyOTYyMTAsImlhdCI6MTY2NzI5NDQxMCwiaXNzdWVyIjoic2VtZXN0ZXJzdGFydGNvZGUtZGF0MyIsInVzZXJuYW1lIjoiYWRtaW4ifQ.dlsMNiQc_OYU2HCa-WMzNImQ3qoNy2CGXEWAbXBQM3g"
 
