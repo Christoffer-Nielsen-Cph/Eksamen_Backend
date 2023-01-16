@@ -38,6 +38,23 @@ public class Project {
         this.projectDescription = projectDescription;
     }
 
+    public Project(Integer id, String projectName, String projectDescription) {
+        this.id = id;
+        this.projectName = projectName;
+        this.projectDescription = projectDescription;
+    }
+
+    public List<String> getUsersAsStrings(){
+        if(users.isEmpty()){
+            return null;
+        }
+        List<String> usersAsStrings = new ArrayList<>();
+        users.forEach((user) ->{
+            usersAsStrings.add(user.getUserName());
+        });
+        return usersAsStrings;
+    }
+
     public Integer getId() {
         return id;
     }

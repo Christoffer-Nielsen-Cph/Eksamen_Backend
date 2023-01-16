@@ -65,4 +65,10 @@ public class DeveloperResource {
 
     }
 
+    @GET
+    @Path("/myProjects/{userName}")
+    public Response myAssignedProjects(@PathParam("userName")String userName) throws API_Exception {
+        return Response.ok().entity(GSON.toJson(facade.myProjects(userName))).type(MediaType.APPLICATION_JSON_TYPE.withCharset(StandardCharsets.UTF_8.name())).build();
+    }
+
 }

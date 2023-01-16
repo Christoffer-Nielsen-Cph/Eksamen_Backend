@@ -5,6 +5,7 @@ import datafacades.DeveloperFacade;
 import dtos.ProjectDTO;
 import dtos.ProjectHourDTO;
 import dtos.UserDTO;
+import entities.Project;
 import entities.ProjectHour;
 import errorhandling.API_Exception;
 
@@ -36,6 +37,10 @@ public class DeveloperDTOFacade {
 
     public ProjectHourDTO editProjectHour(ProjectHourDTO projectHourDTO) throws API_Exception {
         return new ProjectHourDTO(developerFacade.editProjectHours(projectHourDTO.getEntity()));
+    }
+
+    public List<ProjectDTO> myProjects(String userName) throws API_Exception {
+        return ProjectDTO.getProjectDTOs(developerFacade.myAssignedProjects(userName));
     }
 
     public ProjectHourDTO deleteRecording(int projectHourId) throws API_Exception {

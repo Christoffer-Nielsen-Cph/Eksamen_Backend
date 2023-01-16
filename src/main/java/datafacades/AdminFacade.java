@@ -7,6 +7,7 @@ import errorhandling.API_Exception;
 
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
+import javax.persistence.Query;
 import javax.persistence.TypedQuery;
 import java.util.ArrayList;
 import java.util.List;
@@ -91,17 +92,25 @@ public class AdminFacade {
         return projectList;
     }
 
-    public List<ProjectHour> invoiceDetails (int projectId) throws API_Exception {
+    /*public List<ProjectHour> invoiceDetails (int projectId) throws API_Exception {
         EntityManager em = getEntityManager();
         List<ProjectHour> recordingList;
         TypedQuery<ProjectHour> details = em.createQuery("select p from ProjectHour p where p.projectId =:projectId",ProjectHour.class);
         recordingList = details.setParameter("projectId",projectId).getResultList();
+
         return recordingList;
     }
 
+     */
 
+    public List<ProjectHour> invoiceDetails (int projectId) throws API_Exception {
+        EntityManager em = getEntityManager();
+        List<ProjectHour> recordingList;
 
+        Query details = em.createQuery("select u.userBillingPrHour,p.hoursSpent from ProjectHour p join User u on p.userName = u.userName where p.projectId =:projectId");
+        details.setParameter("projectId",projectId);
+        recordingList = details.getResultList();
 
-
-
+        return recordingList;
+    }
 }

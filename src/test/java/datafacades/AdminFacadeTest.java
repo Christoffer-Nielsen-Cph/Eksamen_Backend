@@ -46,13 +46,14 @@ public class AdminFacadeTest {
         u2 = new User("Mark","Mark@gmail.com","test",30490591,250);
         u1.addRole(userRole);
         u2.addRole(userRole);
-        p1 = new Project("Android app","Small interactive game");
-        p2 = new Project("Booking system","Fullstack application to help a local company");
+        p1 = new Project(1,"Android app","Small interactive game");
+        p2 = new Project(2,"Booking system","Fullstack application to help a local company");
 
         try {
             em.getTransaction().begin();
             em.createNamedQuery("User.deleteAllRows").executeUpdate();
             em.createNamedQuery("Role.deleteAllRows").executeUpdate();
+            em.createNamedQuery("ProjectHour.deleteAllRows").executeUpdate();
             em.createNamedQuery("Project.deleteAllRows").executeUpdate();
             em.persist(userRole);
             em.persist(u1);

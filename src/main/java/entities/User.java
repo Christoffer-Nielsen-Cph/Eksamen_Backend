@@ -73,6 +73,17 @@ public class User {
         return rolesAsStrings;
     }
 
+    public List<String> getProjectsAsStrings(){
+        if(projects.isEmpty()){
+            return null;
+        }
+        List<String> projectsAsStrings = new ArrayList<>();
+        projects.forEach((project) ->{
+            projectsAsStrings.add(project.getProjectName());
+        });
+        return projectsAsStrings;
+    }
+
     public boolean verifyPassword(String pw) {
         return (BCrypt.checkpw(pw, userPass));
     }

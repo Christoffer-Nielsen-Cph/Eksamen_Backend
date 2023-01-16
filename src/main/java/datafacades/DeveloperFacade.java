@@ -1,5 +1,6 @@
 package datafacades;
 
+import entities.Project;
 import entities.ProjectHour;
 import entities.Role;
 import entities.User;
@@ -46,6 +47,14 @@ public class DeveloperFacade {
 
     }
 
+    public List<Project> myAssignedProjects (String userName) throws API_Exception {
+        EntityManager em = getEntityManager();
+        User user = em.find(User.class,userName);
+        List<Project> myProjects = user.getProjects();
+        return myProjects;
+
+    }
+
 
     public ProjectHour editProjectHours (ProjectHour projectHour) throws API_Exception{
         EntityManager em = getEntityManager();
@@ -79,8 +88,6 @@ public class DeveloperFacade {
         return ph;
 
     }
-
-
 
     public List<ProjectHour> timeSpentOnSpecificProject (String userName, int projectId) throws API_Exception {
         EntityManager em = getEntityManager();

@@ -15,12 +15,15 @@ public class ProjectDTO {
 
     private String projectDescription;
 
+    private List<String> users;
+
     public ProjectDTO (Project project){
         if(project.getId() != null){
             this.id = project.getId();
         }
         this.projectName = project.getProjectName();
         this.projectDescription = project.getProjectDescription();
+        this.users = project.getUsersAsStrings();
     }
 
     public Project getEntity(){
@@ -30,6 +33,7 @@ public class ProjectDTO {
         }
         project.setProjectName(this.projectName);
         project.setProjectDescription(this.projectDescription);
+        project.getUsersAsStrings();
         return project;
     }
 

@@ -1,20 +1,20 @@
 ### Welcome message to check the database is set up
-GET http://localhost:8080/api/developer/timeSpent/user/1
+GET http://localhost:8080/api/admin/invoiceDetails/1
 
 ### Updates an existing person
-PUT http://localhost:8080/api/developer/1
+PUT http://localhost:8080/api/users/Christoffer
 Content-Type: application/json
 
 {
-  "projectId": 1,
-  "userName": "user",
-  "hoursSpent": 13,
-  "userStory": 1,
-  "description": "something"
+  "userName": "Christoffer",
+  "userPass": "test123",
+  "userEmail": "chris@gmail.com",
+  "userPhone": 10203040,
+  "userBillingPrHour": 400
 }
 
 ### List of all users
-GET http://localhost:8080/api/users/all
+GET http://localhost:8080/api/developer/myProjects/admin
 Content-Type: application/json
 
 ### System greets the admin in this case, if he's logged in
@@ -26,12 +26,14 @@ POST http://localhost:8080/api/developer/record
 Content-Type: application/json
 
 {
-  "userName": "user",
   "projectId": 1,
-  "hoursSpent": 9,
+  "userName": "Christoffer",
+  "hoursSpent": 30,
   "userStory": 3,
-  "description": "Post test"
+  "description": "hihi"
 }
+
+
 
 
 
