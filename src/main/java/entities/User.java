@@ -143,6 +143,10 @@ public class User {
         roleList.add(userRole);
     }
 
+    public void assignProject(Project project){
+        projects.add(project);
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
