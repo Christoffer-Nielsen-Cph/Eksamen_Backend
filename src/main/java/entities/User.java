@@ -33,12 +33,11 @@ public class User {
     @NotNull
     @Column(name = "user_billingPrHour", nullable = false)
     private int userBillingPrHour;
-/*
+
+    /*
     @OneToMany(mappedBy = "userName")
     private List<ProjectHour> projectHours = new ArrayList<>();
-
- */
-
+     */
     @ManyToMany
     @JoinTable(name = "developers_project",
             joinColumns = @JoinColumn(name = "user_name"),
