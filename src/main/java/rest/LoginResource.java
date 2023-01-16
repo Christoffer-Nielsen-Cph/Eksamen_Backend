@@ -1,6 +1,5 @@
 package rest;
 
-import businessfacades.UserDTOFacade;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import entities.User;
@@ -46,7 +45,7 @@ public class LoginResource {
 
         EntityManager em = EMF.createEntityManager();
         try {
-            TypedQuery<User> query = em.createQuery ("select u from User u",entities.User.class);
+            TypedQuery<User> query = em.createQuery ("select u from User u", User.class);
             List<User> users = query.getResultList();
             return "[" + users.size() + "]";
         } catch (Exception e){

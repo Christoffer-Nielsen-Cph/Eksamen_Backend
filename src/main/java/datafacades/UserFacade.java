@@ -6,7 +6,6 @@ import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.TypedQuery;
 import errorhandling.API_Exception;
-import errorhandling.NotFoundException;
 import security.errorhandling.AuthenticationException;
 import java.util.List;
 

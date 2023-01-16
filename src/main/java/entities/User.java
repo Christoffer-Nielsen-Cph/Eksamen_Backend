@@ -1,37 +1,47 @@
 package entities;
 
-import java.io.Serializable;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Objects;
+import org.mindrot.jbcrypt.BCrypt;
+
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
-
-import dtos.UserDTO;
-import org.mindrot.jbcrypt.BCrypt;
+import java.util.*;
 
 @Entity
 @NamedQuery(name = "User.deleteAllRows", query = "DELETE from User")
 @Table(name = "users")
-public class User implements Serializable {
-
-    private static final long serialVersionUID = 1L;
+public class User {
     @Id
-    @Basic(optional = false)
-    @NotNull
-    @Column(name = "user_name", length = 25)
+    @Size(max = 25)
+    @Column(name = "user_name", nullable = false, length = 25)
     private String userName;
-    @Basic(optional = false)
+
+    @Size(max = 255)
     @NotNull
-    @Size(min = 1, max = 255)
-    @Column(name = "user_email")
+    @Column(name = "user_email", nullable = false)
     private String userEmail;
-    @Basic(optional = false)
+
+    @Size(max = 255)
     @NotNull
-    @Size(min = 1, max = 255)
-    @Column(name = "user_pass")
+    @Column(name = "user_pass", nullable = false)
     private String userPass;
+
+    @NotNull
+    @Column(name = "user_phone", nullable = false)
+    private int userPhone;
+
+    @NotNull
+    @Column(name = "user_billingPrHour", nullable = false)
+    private int userBillingPrHour;
+
+    @OneToMany(mappedBy = "userName")
+    private List<ProjectHour> projectHours = new ArrayList<>();
+
+    @ManyToMany
+    @JoinTable(name = "developers_project",
+            joinColumns = @JoinColumn(name = "user_name"),
+            inverseJoinColumns = @JoinColumn(name = "project_id"))
+    private List<Project> projects = new ArrayList<>();
 
     @JoinTable(name = "user_roles", joinColumns = {
             @JoinColumn(name = "user_name", referencedColumnName = "user_name")}, inverseJoinColumns = {
@@ -42,21 +52,12 @@ public class User implements Serializable {
     public User() {
     }
 
-    public User(String userName, String userPass) {
-        this.userName = userName;
-        this.userPass = BCrypt.hashpw(userPass, BCrypt.gensalt());
-    }
-
-    public User(String userName, String userPass, List<Role> roleList) {
-        this.userName = userName;
-        this.userPass = BCrypt.hashpw(userPass, BCrypt.gensalt());
-        this.roleList = roleList;
-    }
-
-    public User(String userName, String userEmail, String userPass) {
+    public User(String userName, String userEmail, String userPass, int userPhone, int userBillingPrHour) {
         this.userName = userName;
         this.userEmail = userEmail;
         this.userPass = BCrypt.hashpw(userPass, BCrypt.gensalt());
+        this.userPhone = userPhone;
+        this.userBillingPrHour = userBillingPrHour;
     }
 
     public List<String> getRolesAsStrings() {
@@ -82,22 +83,6 @@ public class User implements Serializable {
         this.userName = userName;
     }
 
-    public String getUserPass() {
-        return this.userPass = BCrypt.hashpw(userPass, BCrypt.gensalt());
-    }
-
-    public void setUserPass(String userPass) {
-        this.userPass = BCrypt.hashpw(userPass, BCrypt.gensalt());
-    }
-
-    public List<Role> getRoleList() {
-        return roleList;
-    }
-
-    public void setRoleList(List<Role> roleList) {
-        this.roleList = roleList;
-    }
-
     public String getUserEmail() {
         return userEmail;
     }
@@ -106,6 +91,53 @@ public class User implements Serializable {
         this.userEmail = userEmail;
     }
 
+    public String getUserPass() {
+        return this.userPass = BCrypt.hashpw(userPass, BCrypt.gensalt());
+    }
+
+    public void setUserPass(String userPass) {
+        this.userPass = BCrypt.hashpw(userPass, BCrypt.gensalt());
+    }
+
+    public int getUserPhone() {
+        return userPhone;
+    }
+
+    public void setUserPhone(int userPhone) {
+        this.userPhone = userPhone;
+    }
+
+    public int getUserBillingPrHour() {
+        return userBillingPrHour;
+    }
+
+    public void setUserBillingPrHour(int userBillingPrHour) {
+        this.userBillingPrHour = userBillingPrHour;
+    }
+
+    public List<ProjectHour> getProjectHours() {
+        return projectHours;
+    }
+
+    public void setProjectHours(List<ProjectHour> projectHours) {
+        this.projectHours = projectHours;
+    }
+
+    public List<Project> getProjects() {
+        return projects;
+    }
+
+    public void setProjects(List<Project> projects) {
+        this.projects = projects;
+    }
+
+    public List<Role> getRoles() {
+        return roleList;
+    }
+
+    public void setRoleList(List<Role> roleList) {
+        this.roleList = roleList;
+    }
 
     public void addRole(Role userRole) {
         roleList.add(userRole);
@@ -128,7 +160,12 @@ public class User implements Serializable {
     public String toString() {
         return "User{" +
                 "userName='" + userName + '\'' +
+                ", userEmail='" + userEmail + '\'' +
                 ", userPass='" + userPass + '\'' +
+                ", userPhone=" + userPhone +
+                ", userBillingPrHour=" + userBillingPrHour +
+                ", projectHours=" + projectHours +
+                ", projects=" + projects +
                 ", roleList=" + roleList +
                 '}';
     }

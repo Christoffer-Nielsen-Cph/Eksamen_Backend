@@ -4,7 +4,6 @@ import dtos.UserDTO;
 import entities.Role;
 import entities.User;
 import errorhandling.API_Exception;
-import errorhandling.NotFoundException;
 import org.junit.jupiter.api.*;
 import utils.EMF_Creator;
 import javax.persistence.EntityManager;
@@ -42,9 +41,15 @@ public class UserDTOFacadeTest {
         u1.setUserName("Oscar");
         u1.setUserPass("test");
         u1.addRole(userRole);
+        u1.setUserEmail("Oscar@gmail.com");
+        u1.setUserPhone(20309040);
+        u1.setUserBillingPrHour(300);
         u2.setUserName("Mark");
         u2.setUserPass("test");
         u2.addRole(userRole);
+        u2.setUserEmail("Mark@gmail.com");
+        u2.setUserPhone(30490591);
+        u2.setUserBillingPrHour(250);
         try {
             em.getTransaction().begin();
             em.createNamedQuery("User.deleteAllRows").executeUpdate();
@@ -67,7 +72,7 @@ public class UserDTOFacadeTest {
 
     @Test
     void createUserDTOTest() throws API_Exception {
-        UserDTO userDTO = new UserDTO(new User("Chris","PW"));
+        UserDTO userDTO = new UserDTO(new User("Chris","Chris@gmail.com","PW",20403193,300));
         facade.createUser(userDTO);
         assertNotNull(userDTO.getUserName());
         int actualSize = facade.getAllUsers().size();
@@ -76,7 +81,7 @@ public class UserDTOFacadeTest {
 
     @Test
     void createNoDuplicateUserDTOs() throws API_Exception {
-        UserDTO userDTO = new UserDTO(new User("Oscar", "test"));
+        UserDTO userDTO = new UserDTO(new User("Oscar", "oscar@gmail.com","test",30481032,280));
         assertThrows(API_Exception.class, () -> facade.createUser(userDTO));
     }
 

@@ -1,9 +1,7 @@
 package businessfacades;
 
 import dtos.UserDTO;
-import entities.User;
 import errorhandling.API_Exception;
-import errorhandling.NotFoundException;
 import datafacades.UserFacade;
 import security.errorhandling.AuthenticationException;
 

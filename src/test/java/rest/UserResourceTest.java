@@ -71,9 +71,15 @@ public class UserResourceTest {
         u1.setUserName("Oscar");
         u1.setUserPass("test");
         u1.addRole(userRole);
+        u1.setUserEmail("Oscar@gmail.com");
+        u1.setUserPhone(20309040);
+        u1.setUserBillingPrHour(300);
         u2.setUserName("Mark");
         u2.setUserPass("test");
         u2.addRole(userRole);
+        u2.setUserEmail("Mark@gmail.com");
+        u2.setUserPhone(30490591);
+        u2.setUserBillingPrHour(250);
         try {
             em.getTransaction().begin();
             em.createNamedQuery("User.deleteAllRows").executeUpdate();
@@ -156,6 +162,9 @@ public class UserResourceTest {
         user.setUserPass("PW");
         Role role = new Role("user");
         user.addRole(role);
+        user.setUserEmail("Chris@gmail.com");
+        user.setUserPhone(20304912);
+        user.setUserBillingPrHour(300);
 
         UserDTO udto = new UserDTO(user);
         String requestBody = GSON.toJson(udto);

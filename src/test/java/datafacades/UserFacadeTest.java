@@ -1,7 +1,5 @@
 package datafacades;
 
-import datafacades.UserFacade;
-import dtos.UserDTO;
 import entities.Role;
 import entities.User;
 import errorhandling.API_Exception;
@@ -44,9 +42,15 @@ public class UserFacadeTest {
         u1.setUserName("Oscar");
         u1.setUserPass("test");
         u1.addRole(userRole);
+        u1.setUserEmail("Oscar@gmail.com");
+        u1.setUserPhone(20309040);
+        u1.setUserBillingPrHour(300);
         u2.setUserName("Mark");
         u2.setUserPass("test");
         u2.addRole(userRole);
+        u2.setUserEmail("Mark@gmail.com");
+        u2.setUserPhone(30490591);
+        u2.setUserBillingPrHour(250);
         try {
             em.getTransaction().begin();
             em.createNamedQuery("User.deleteAllRows").executeUpdate();
@@ -67,7 +71,7 @@ public class UserFacadeTest {
 
     @Test
     void createUserTest() throws API_Exception {
-        User user = new User("Chris", "PW");
+        User user = new User("Chris", "Chris@gmail.com","PW",40809132,300);
         facade.createUser(user);
         assertNotNull(user.getUserName());
         int actualSize = facade.getAllUsers().size();
@@ -76,7 +80,7 @@ public class UserFacadeTest {
 
     @Test
     void createNoDuplicateUsers() {
-        User user = new User("Oscar", "PW");
+        User user = new User("Oscar", "oscar@gmail.com", "PW",10329104,280);
         assertThrows(API_Exception.class, () -> facade.createUser(user));
     }
 

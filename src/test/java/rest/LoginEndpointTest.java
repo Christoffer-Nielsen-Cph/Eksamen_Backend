@@ -1,8 +1,9 @@
 package rest;
 
-import entities.User;
+
 import entities.Role;
 
+import entities.User;
 import io.restassured.RestAssured;
 import static io.restassured.RestAssured.given;
 import io.restassured.http.ContentType;
@@ -18,7 +19,6 @@ import static org.hamcrest.Matchers.equalTo;
 import org.junit.jupiter.api.AfterAll;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.BeforeEach;
-import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Test;
 import utils.EMF_Creator;
 
@@ -69,11 +69,11 @@ public class LoginEndpointTest {
 
             Role userRole = new Role("user");
             Role adminRole = new Role("admin");
-            User user = new User("user", "test");
+            User user = new User("user", "user@gmail.com","test",20401031,300);
             user.addRole(userRole);
-            User admin = new User("admin", "test");
+            User admin = new User("admin","admin@gmail.com", "test",90103020,100);
             admin.addRole(adminRole);
-            User both = new User("user_admin", "test");
+            User both = new User("user_admin","both@gmail.com","test",10304010,150);
             both.addRole(userRole);
             both.addRole(adminRole);
             em.persist(userRole);
