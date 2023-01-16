@@ -9,22 +9,26 @@ import java.util.Objects;
 @NamedQuery(name = "ProjectHour.deleteAllRows", query = "DELETE from ProjectHour ")
 @Table(name = "project_hours")
 public class ProjectHour {
+
     @Id
-    @Column(name = "project_id", nullable = false)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "project_hours_id", nullable = false)
     private Integer id;
 
+    @Column(name = "project_id", nullable = false)
+    private Integer projectId;
+
     @NotNull
-    @ManyToOne(fetch = FetchType.LAZY, optional = false)
-    @JoinColumn(name = "user_name", nullable = false)
-    private User userName;
+    @Column(name = "user_name", nullable = false)
+    private String userName;
 
     @NotNull
     @Column(name = "hours_spent", nullable = false)
-    private int hoursSpent;
+    private Integer hoursSpent;
 
     @NotNull
     @Column(name = "user_story", nullable = false)
-    private int userStory;
+    private Integer userStory;
 
     @Size(max = 100)
     @NotNull
@@ -34,9 +38,16 @@ public class ProjectHour {
     public ProjectHour() {
     }
 
-    public ProjectHour(Integer id, User userName, int hoursSpent, int userStory, String description) {
-        this.id = id;
+    public ProjectHour(int projectId, String userName, int hoursSpent, int userStory, String description) {
+        this.projectId = projectId;
         this.userName = userName;
+        this.hoursSpent = hoursSpent;
+        this.userStory = userStory;
+        this.description = description;
+    }
+
+    public ProjectHour(int projectId, int hoursSpent, int userStory, String description) {
+        this.projectId = projectId;
         this.hoursSpent = hoursSpent;
         this.userStory = userStory;
         this.description = description;
@@ -50,27 +61,35 @@ public class ProjectHour {
         this.id = id;
     }
 
-    public User getUserName() {
+    public Integer getProjectId() {
+        return projectId;
+    }
+
+    public void setProjectId(Integer projectId) {
+        this.projectId = projectId;
+    }
+
+    public String getUserName() {
         return userName;
     }
 
-    public void setUserName(User userName) {
+    public void setUserName(String userName) {
         this.userName = userName;
     }
 
-    public int getHoursSpent() {
+    public Integer getHoursSpent() {
         return hoursSpent;
     }
 
-    public void setHoursSpent(int hoursSpent) {
+    public void setHoursSpent(Integer hoursSpent) {
         this.hoursSpent = hoursSpent;
     }
 
-    public int getUserStory() {
+    public Integer getUserStory() {
         return userStory;
     }
 
-    public void setUserStory(int userStory) {
+    public void setUserStory(Integer userStory) {
         this.userStory = userStory;
     }
 
@@ -99,6 +118,7 @@ public class ProjectHour {
     public String toString() {
         return "ProjectHour{" +
                 "id=" + id +
+                ", projectId=" + projectId +
                 ", userName=" + userName +
                 ", hoursSpent=" + hoursSpent +
                 ", userStory=" + userStory +

@@ -33,9 +33,11 @@ public class User {
     @NotNull
     @Column(name = "user_billingPrHour", nullable = false)
     private int userBillingPrHour;
-
+/*
     @OneToMany(mappedBy = "userName")
     private List<ProjectHour> projectHours = new ArrayList<>();
+
+ */
 
     @ManyToMany
     @JoinTable(name = "developers_project",
@@ -114,7 +116,7 @@ public class User {
     public void setUserBillingPrHour(int userBillingPrHour) {
         this.userBillingPrHour = userBillingPrHour;
     }
-
+/*
     public List<ProjectHour> getProjectHours() {
         return projectHours;
     }
@@ -122,6 +124,8 @@ public class User {
     public void setProjectHours(List<ProjectHour> projectHours) {
         this.projectHours = projectHours;
     }
+
+ */
 
     public List<Project> getProjects() {
         return projects;
@@ -168,7 +172,6 @@ public class User {
                 ", userPass='" + userPass + '\'' +
                 ", userPhone=" + userPhone +
                 ", userBillingPrHour=" + userBillingPrHour +
-                ", projectHours=" + projectHours +
                 ", projects=" + projects +
                 ", roleList=" + roleList +
                 '}';

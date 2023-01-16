@@ -1,12 +1,14 @@
 package datafacades;
 
 import entities.Project;
+import entities.ProjectHour;
 import entities.User;
 import errorhandling.API_Exception;
 
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.TypedQuery;
+import java.util.ArrayList;
 import java.util.List;
 
 public class AdminFacade {
@@ -74,9 +76,30 @@ public class AdminFacade {
         return user;
     }
 
-    public void collectInvoice(int projectId) throws API_Exception {
+    public List<Project> collectInvoice (int projectId) throws API_Exception {
+        EntityManager em = getEntityManager();
+        List<Project> projectList = new ArrayList<>();
+        try{
+            TypedQuery<Project> projects = em.createQuery("select p from Project p where p.id =:projectId",Project.class);
+            projectList = projects.setParameter("projectId",projectId).getResultList();
 
+        } catch (Exception e) {
+            if(projectList == null) {
+                throw new API_Exception("Can't find a project with the id: "+projectId,400,e);
+            }
+        }
+        return projectList;
     }
+
+    public List<ProjectHour> invoiceDetails (int projectId) throws API_Exception {
+        EntityManager em = getEntityManager();
+        List<ProjectHour> recordingList;
+        TypedQuery<ProjectHour> details = em.createQuery("select p from ProjectHour p where p.projectId =:projectId",ProjectHour.class);
+        recordingList = details.setParameter("projectId",projectId).getResultList();
+        return recordingList;
+    }
+
+
 
 
 

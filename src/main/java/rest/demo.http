@@ -1,12 +1,16 @@
 ### Welcome message to check the database is set up
-GET http://localhost:8080/api/info
+GET http://localhost:8080/api/developer/timeSpent/user/1
 
 ### Updates an existing person
-PUT http://localhost:8080/api/users/chris
+PUT http://localhost:8080/api/developer/1
 Content-Type: application/json
 
 {
-  "userPass": "test"
+  "projectId": 1,
+  "userName": "user",
+  "hoursSpent": 13,
+  "userStory": 1,
+  "description": "something"
 }
 
 ### List of all users
@@ -18,16 +22,20 @@ GET http://localhost:8080/api/info/admin
 x-access-token:eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJhZG1pbiIsInJvbGVzIjoiYWRtaW4iLCJleHAiOjE2NjcyOTYyMTAsImlhdCI6MTY2NzI5NDQxMCwiaXNzdWVyIjoic2VtZXN0ZXJzdGFydGNvZGUtZGF0MyIsInVzZXJuYW1lIjoiYWRtaW4ifQ.dlsMNiQc_OYU2HCa-WMzNImQ3qoNy2CGXEWAbXBQM3g"
 
 ### Creates a new person
-POST http://localhost:8080/api/users
+POST http://localhost:8080/api/developer/record
 Content-Type: application/json
 
 {
-  "userName": "chris123",
-  "userEmail": "chris@gmail.com",
-  "userPass": "123"
+  "userName": "user",
+  "projectId": 1,
+  "hoursSpent": 9,
+  "userStory": 3,
+  "description": "Post test"
 }
 
+
+
 ### Deletes an existing person
-DELETE http://localhost:8080/api/users/chris
+DELETE http://localhost:8080/api/developer/1
 Content-Type: application/json
 

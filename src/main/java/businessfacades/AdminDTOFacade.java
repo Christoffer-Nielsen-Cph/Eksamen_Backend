@@ -3,6 +3,7 @@ package businessfacades;
 import datafacades.AdminFacade;
 import datafacades.UserFacade;
 import dtos.ProjectDTO;
+import dtos.ProjectHourDTO;
 import dtos.UserDTO;
 import errorhandling.API_Exception;
 
@@ -32,6 +33,13 @@ public class AdminDTOFacade {
         return ProjectDTO.getProjectDTOs(adminFacade.listAllProjects());
     }
 
+    public List<ProjectDTO> collectInvoice(int projectId) throws API_Exception {
+        return ProjectDTO.getProjectDTOs(adminFacade.collectInvoice(projectId));
+    }
+
+    public List<ProjectHourDTO> invoiceDetails(int projectId) throws API_Exception {
+        return ProjectHourDTO.getProjectHourDTOs(adminFacade.invoiceDetails(projectId));
+    }
     public UserDTO assignDeveloperToProject(String userName,int projectId) throws API_Exception {
         return new UserDTO(adminFacade.assignDeveloperToProject(userName,projectId));
     }
