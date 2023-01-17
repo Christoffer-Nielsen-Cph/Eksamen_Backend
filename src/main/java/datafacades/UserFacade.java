@@ -69,7 +69,7 @@ public class UserFacade {
         EntityManager em = getEntityManager();
         try {
             em.getTransaction().begin();
-            user.addRole(new Role("admin"));
+            user.addRole(new Role("user"));
             User u = em.merge(user);
             em.getTransaction().commit();
             return u;
